@@ -24,4 +24,4 @@ else
     exit 2
 fi
 
-cat "${TMP_PASSWORD_FILE}" | openconnect --passwd-on-stdin -b --protocol=gp --csd-wrapper=/docker/hipreport.sh --script-tun --script "ocproxy -D 11080" -u ${OPENCONNECT_USERNAME} --passwd-on-stdin --non-inter --reconnect-timeout=60 ${OPENCONNECT_HOST}
+cat "${TMP_PASSWORD_FILE}" | /docker/openconnect/openconnect --passwd-on-stdin -b --protocol=gp --csd-wrapper=/docker/hipreport.sh --script-tun --script "ocproxy -D 11080" -u ${OPENCONNECT_USERNAME} --passwd-on-stdin --non-inter --reconnect-timeout=60 ${OPENCONNECT_HOST}

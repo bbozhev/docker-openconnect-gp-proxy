@@ -1,5 +1,5 @@
 FROM debian:9-slim as builder
-WORKDIR /openconnect
+WORKDIR /docker
 RUN apt update
 RUN apt-get upgrade -y
 RUN apt-get install -y \
@@ -20,11 +20,11 @@ RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/*
 RUN git clone https://github.com/dlenski/openconnect.git /docker/openconnect
 RUN cd /docker/openconnect \
-	./autogen.sh \
-	./configure \
-	make \ 
-	make install \
-	ldconfig
+  && ./autogen.sh \
+  && ./configure \
+  && make \
+  && make install \
+  && ldconfig
 ADD openconnect-gp-proxy.sh /docker/openconnect-gp-proxy.sh
 ADD hipreport.sh /docker/hipreport.sh
 ENTRYPOINT ["/docker/openconnect-gp-proxy.sh"]
